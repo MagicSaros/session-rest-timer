@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Session/Rest Timer</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+  <div id="app">
+    <div class="background" v-if="isBackgroundDisplayed">
+    </div>
+      <div class="positioner">
+        <input
+          class="main-button"
+          type="button"
+          v-bind:value="remainingTime"
+          v-bind:disabled="isSessionStarted || isRestStarted"
+          @click="startSession"
+          >
+        <div class="settings">
+          <p class="title">Settings</p>
+          <p>Session Time</p>
+          <div class="input-positioner">
+            <input type="text" v-model="inputSessionTimeMinutes" placeholder="Minutes">
+            <input type="text" v-model="inputSessionTimeSeconds" placeholder="Seconds">
+          </div>
+          <p>Rest Time</p>
+          <div class="input-positioner">
+            <input type="text" v-model="inputRestTimeMinutes" placeholder="Minutes">
+            <input type="text" v-model="inputRestTimeSeconds" placeholder="Seconds">
+          </div>
+          <input type="button" value="Submit time" @click="submitTime">
+          <input type="button" value="Reset" @click="reset">
+        </div>
+        <div class="alert-panel" v-if="isAlertDisplayed">
+          <p class="title">Choose action</p>
+          <input type="button" class="session" @click="startSession" value="Next session">
+          <input type="button" class="rest" @click="startRest" value="Go to rest">
+          <input type="button" class="close" @click="hideButtons" value="Close panel">
+        </div>
+      </div>
+      <audio id="endSession" src="media/endSession.wav"></audio>
+      <audio id="endRest" src="media/endRest.wav"></audio>
+  </div>
+  <script src="scripts/vue.js"></script>
+  <script src="scripts/main.js"></script>
+</body>
+</html>
